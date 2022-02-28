@@ -45,6 +45,11 @@ footer {
     padding: 1rem 2rem 1rem;
     background: rgba(0,0,0,0.4);
 }
+@media only screen and (max-width: 1024px) {
+    footer {
+        flex-direction: column;
+    }
+}
 footer > * {
     align-items: flex-end;
 }
@@ -53,7 +58,7 @@ footer .center {
     color: rgba(255, 102, 0, 0.6);
 }
 footer .right {
-    margin: auto 0 0;
+    margin: auto 0 0 auto;
     font-family: Arial, sans-serif;
 }
         </style>
