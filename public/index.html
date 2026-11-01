@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Coraabia time</title>
+        <meta name="description" content="Current Coraab time and a converter between Earth and Coraab dates">
+        <meta name="google-site-verification" content="AvNQqlEvjEh_M589lRmDdnCaxoSp6x1uXoSLFiQP6vE" />
+        <link rel="preload" href="./fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <video class="background" muted loop playsinline preload="none" poster="./media/bg.webp" aria-hidden="true">
+            <source src="./media/bg.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'>
+            <source src="./media/bg.h264.mp4" type='video/mp4; codecs="avc1.640020"'>
+        </video>
+        <div class="shade" aria-hidden="true"></div>
+
+        <canvas id="lasers" aria-hidden="true"></canvas>
+        <h1 id="date-text" class="date-fallback"></h1>
+
+        <div class="controls">
+            <header class="controls-top">
+                <span class="brand">Coraabia time</span>
+                <nav>
+                    <a href="https://github.com/JJetmar/coraab-time" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.npmjs.com/package/coraab-time" target="_blank" rel="noopener">npm</a>
+                </nav>
+            </header>
+            <footer class="controls-bottom">
+                <p>Next Tu starts in <span id="tu-end"></span>.</p>
+                <button id="open-converter" class="button" type="button">Convert dates</button>
+            </footer>
+        </div>
+
+        <dialog id="converter" aria-label="Converter">
+            <div class="dialog-body">
+                <form method="dialog" class="converter-bar">
+                    <span id="source-name" class="side-name">Earth time</span>
+                    <button id="swap" class="swap" type="button" aria-label="Swap direction">
+                        <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/>
+                        </svg>
+                    </button>
+                    <span id="target-name" class="side-name">Coraab time</span>
+                    <button class="close" type="submit" aria-label="Close">×</button>
+                </form>
+
+                <div class="panels">
+                    <section class="panel">
+                        <div id="earth-source" class="earth-fields">
+                            <input id="earth-date" type="date" aria-label="Earth date">
+                            <input id="earth-time" type="time" step="1" aria-label="Earth time">
+                        </div>
+                        <div id="coraab-source" class="coraab-fields" hidden>
+                            <label class="field"><span>TU</span><input id="field-tu" type="number" step="1" inputmode="numeric"></label>
+                            <label class="field"><span>TOL</span><select id="field-tol"></select></label>
+                            <label class="field"><span>Day</span>
+                                <select id="field-day">
+                                    <option value="L">Oonar</option>
+                                    <option value="H">Hakkar</option>
+                                </select>
+                            </label>
+                            <label class="field"><span>UN</span><input id="field-un" type="number" min="1" max="96" step="1" inputmode="numeric"></label>
+                            <label class="field"><span>UNT</span><input id="field-unt" type="number" min="1" max="12" step="1" inputmode="numeric"></label>
+                            <label class="field"><span>OM</span><input id="field-om" type="number" min="1" max="60" step="1" inputmode="numeric"></label>
+                        </div>
+                        <button id="converter-now" class="now" type="button">Now</button>
+                    </section>
+
+                    <section class="panel panel-target" aria-live="polite">
+                        <output id="result" class="result"></output>
+                        <div id="result-detail" class="detail"></div>
+                    </section>
+                </div>
+                <p class="note">Coraab time is precise to one OM (5 Earth seconds).</p>
+            </div>
+        </dialog>
+
+        <script type="module" src="./app.js"></script>
+    </body>
+</html>

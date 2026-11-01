@@ -1,0 +1,70 @@
+{
+  "name": "coraab-time",
+  "version": "0.1.0",
+  "description": "Time and date operations in Coraab units (TU, TOL, UN, UNT, OM, GUL) with a Day.js-like API and an optional Day.js plugin.",
+  "keywords": [
+    "coraabia",
+    "coraab",
+    "time",
+    "calendar",
+    "dayjs",
+    "dayjs-plugin"
+  ],
+  "license": "MIT",
+  "author": "JJetmar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JJetmar/coraab-time.git"
+  },
+  "homepage": "https://jjetmar.github.io/coraab-time",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./dayjs": {
+      "import": {
+        "types": "./dist/dayjs.d.ts",
+        "default": "./dist/dayjs.js"
+      },
+      "require": {
+        "types": "./dist/dayjs.d.cts",
+        "default": "./dist/dayjs.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.0"
+  },
+  "peerDependenciesMeta": {
+    "dayjs": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "dayjs": "^1.11.23",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}
